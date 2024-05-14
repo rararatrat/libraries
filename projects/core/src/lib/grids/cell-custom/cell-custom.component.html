@@ -1,0 +1,33 @@
+<ng-container *ngFor="let pElement of cellCustomActions" [ngTemplateOutlet]="pContents" [ngTemplateOutletContext]="{
+    label: getElementValue(pElement, 'text', params), 
+    btnClass: getElementValue(pElement, 'btnClass', params), 
+    badgeClass: getElementValue(pElement, 'badgeClass', params)}">
+    <ng-template #pContents let-label="label" let-btnClass="btnClass" let-badgeClass="badgeClass">
+        <span *ngIf="params.data && !getElementValue(pElement, 'isHidden', params)" [ngClass]="pElement.bgClass" [ngStyle]="getBgStyle(pElement)"
+        style="text-align:center" class="ag-cell-custom" [pTooltip]="getElementValue(pElement, 'title', params)" [ngSwitch]="pElement.isMulti == true">
+
+        <ng-container *ngSwitchCase="true">
+        <p-splitButton [label]="label" [icon]="getElementValue(pElement, 'icon', params)" [model]="pElement.menuItems || []" [appendTo]="'body'" styleClass="p-button-text"></p-splitButton> 
+        </ng-container>
+        
+        <ng-container *ngSwitchDefault [ngSwitch]="pElement.mode">
+            <span *ngSwitchCase="'button'">
+                    <button pButton pRipple type="button" [label]="label" [class]="btnClass" (click)="buttonClick($event, pElement, params)"></button>
+            </span>
+            <span *ngSwitchCase="'badge'">
+                <p-badge [value]="label" [severity]="badgeClass" [styleClass]="'p-mr-2 ' + getElementValue(pElement, 'btnClass', params)" (click)="buttonClick($event, pElement, params)"></p-badge>
+            </span>
+            <span *ngSwitchDefault (click)="buttonClick($event, pElement, params)" style="align-items: center;" [pTooltip]="getElementValue(pElement, 'title', params)">
+                <span *ngIf="!pElement.isReversedTextAndIcon" [innerHTML]="label"></span>
+                <span *ngIf="pElement.icon" [class]="'eg-m-x-4 ' + getElementValue(pElement, 'iconClass', params) + ' ' + getElementValue(pElement, 'icon', params)" [ngStyle]="getElementValue(pElement, 'iconStyle', params)"></span>
+                <span *ngIf="pElement.isReversedTextAndIcon" [innerHTML]="label"></span>
+            </span>
+        </ng-container>
+
+        <div *ngIf="getElementValue(pElement, 'isCheckbox', params)"
+                class="ag-wrapper ag-input-wrapper ag-checkbox-input-wrapper m-l-1" [ngClass]="{'ag-checked':checkboxValue}">
+            <input class="ag-input-field-input ag-checkbox-input" [(ngModel)]="checkboxValue" type="checkbox" >
+        </div>
+    </span> <span innerHTML="pElement.extraText"></span>
+    </ng-template>
+</ng-container>

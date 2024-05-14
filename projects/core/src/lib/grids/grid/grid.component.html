@@ -1,0 +1,60 @@
+<ng-container *ngIf="isDebug">
+    <ng-container *ngIf="gridParams !== undefined" [ngTemplateOutlet]="tests" [ngTemplateOutletContext]="{isChanged: isChanged(), hasDuplicates: hasDuplicates(), hasErrors: hasErrors()}"></ng-container>
+    <ng-template #tests let-isChanged="isChanged" let-hasDuplicates="hasDuplicates" let-hasErrors="hasErrors">
+        <span style="margin-right: 4px" #spanLabel>isChanged(): {{isChanged}}</span>
+        <span style="margin-right: 4px" #spanLabel2>hasErrors(): {{hasErrors}}</span>
+        <span style="margin-right: 4px" #spanLabel3>hasDuplicates(): {{hasDuplicates}}</span>
+        <button type="button" pButton pRipple class="p-button p-button-primary" icon="pi pi-refresh" label="Refresh()" (click)="refresh()"></button>
+        <button #submitButton type="button" pButton pRipple class="p-button-primary eg-m-x-4" [icon]="picons.SAVE" label="Submit" [disabled]="!isChanged || hasDuplicates || hasErrors"></button>
+        <button type="button" pButton pRipple class="p-button-primary eg-m-x-4" [icon]="picons.APPLE" label="Apply Filters and Columns" (click)="applyFilters()"></button>
+        <p-message *ngIf="hasDuplicates || hasErrors" severity="error" [text]="'Some field(s) have ' + (hasErrors ? 'validation error(s)' : 'duplicate entries') + '.'"></p-message>
+    </ng-template>
+    isDebug: {{ isDebug }}
+    isDarkMode: {{ darkMode }}
+    agTheme: {{agTheme}}
+    {{ gridParams?.api?.getColumnDef('id') | json }} {{ gridParams | isNotEmpty }} on {{on}} isDebug: {{ isDebug }}
+</ng-container>
+<ng-container [ngTemplateOutlet]="on ? gridTemplate : skeleton" [ngTemplateOutletContext]="{agTheme: agTheme, dark: (darkMode), darkTheme: darkMode && ['balham', 'alpine'].includes(this.agTheme) ? '-dark' : ''}"></ng-container>
+<ng-template #gridTemplate
+    let-agTheme="agTheme" let-dark="dark" let-darkTheme="darkTheme">
+    <ag-grid-angular #agGrid 
+        [style]="agStyle"
+        [class]="dark + ' ag-theme-' + agTheme + darkTheme + ' ' + agClass"
+        [columnDefs]="columnDefs"
+        [defaultColDef]="defaultColDef"
+        [rowData]="rowData"
+        [rowModelType]="rowModelType"
+        [components]="components"
+        [sideBar]="sideBar"
+        [gridOptions]="gridOptions"
+        [columnTypes]="columnTypes"
+        [icons]="icons"
+        [pagination]="pagination"    
+        [paginationPageSize]="paginationPageSize"
+        [paginationAutoPageSize]="paginationAutoPageSize"
+        [serverSideInfiniteScroll]="serverSideInfiniteScroll"
+        [cacheOverflowSize]="cacheOverflowSize"
+        [maxConcurrentDatasourceRequests]="maxConcurrentDatasourceRequests"
+        [infiniteInitialRowCount]="infiniteInitialRowCount"
+        [maxBlocksInCache]="maxBlocksInCache"
+        [cacheBlockSize]="cacheBlockSize"
+        [getRowId]="getRowId"
+        [localeText]="localeText"
+        [getLocaleText]="getLocaleText"
+        [overlayLoadingTemplate]="tOverlay.loading"
+        [overlayNoRowsTemplate]="tOverlay.noRows"
+        (gridReady)="onGridReady($event)"
+        (firstDataRendered)="onFirstDataRendered($event)"
+        (selectionChanged)="onSelectionChanged($event)"
+        (cellValueChanged)="onCellValueChanged($event)"
+        (filterChanged)="onFilterChanged($event)"
+        (paginationChanged)="onPaginationChanged($event)"
+        (sortChanged)="onSortChanged($event)"
+        (cellEditingStarted)="onCellEditingStarted($event)"
+        (cellEditingStopped)="onCellEditingStopped($event)"
+    ></ag-grid-angular>
+</ng-template>
+
+<ng-template #skeleton>
+    <p-skeleton  width="100%" height="100%" ></p-skeleton>
+</ng-template>

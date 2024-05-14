@@ -1,0 +1,31 @@
+<div *ngIf="showSplash" class="app-splash-screen" [ngStyle]="{'opacity': opacityChange, 'transition': splashTransition}">
+    <div class="logo-png">
+        <img [src]="image" class="logo-png">
+
+        <!-- <div style="text-align: center; margin-top:20px; color: white;">
+            <div class="progress">
+                <div class="color"></div>
+            </div>
+        </div> -->
+
+
+    </div>
+
+   <!--  <div class="content">
+        <div class="content__container">
+
+            <p class="content__container__text">
+            {{loadingText}}:
+            </p>
+
+            <ul class="content__container__list">
+            <li class="content__container__list__item">Connecting</li>
+            <li class="content__container__list__item">Fetching Data</li>
+            <li class="content__container__list__item">Rendering</li>
+            <li class="content__container__list__item">Still Rendering</li>
+
+            </ul>
+        </div>
+    </div> -->
+
+</div>

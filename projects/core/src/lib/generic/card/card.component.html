@@ -1,0 +1,24 @@
+<ng-container [ngSwitch]="view">
+    <div *ngSwitchCase="'default'" class="align-items-center flex full-width line-item">
+        <div class="flex-1">
+            <div [innerHTML]="item?.name"></div>
+            <div class="fs-11" [innerHTML]="'Status: ' + (status.byCode[item?.status?.id] || item?.status?.id || item?.status)"></div>
+            <div class="fs-11" [innerHTML]="'Priority: ' + item?.priority"></div>
+            <div class="fs-11" [innerHTML]="'Projects: ' + item?.projects?.join(', ')"></div>
+            <div class="fs-11" [innerHTML]="'Modules: ' + item?.modules?.join(', ')"></div>
+            <div class="fs-11" [innerHTML]="'Owner: ' + item?.owner"></div>
+            <div class="fs-11" [innerHTML]="'Requestor: ' + item?.requestor"></div>
+            <div class="fs-11" [innerHTML]="'Task Type: ' + (taskType.byCode[item?.task_type?.id] || item?.task_type?.id || item?.task_type)"></div>
+            <div *ngIf="item?.delay_driver" class="fs-11" [innerHTML]="'Delay Driver: ' + item?.delay_driver"></div>
+            <!-- name: 'Item 1', status: "Status 1", laneId: 1, position: 0, projects: [], modules: [], priority: 1, delay_driver: '', owner: '', requestor: '', task_type: 1 -->
+        </div>
+    
+        <span class="item-edit">
+            <button pButton pRipple type="button" [icon]="PI.PENCIL" [pTooltip]="'Edit Item'" class="p-button-rounded p-button-text valign-middle" (click)="editItem.emit({mouseEvent: $event})"></button>
+        </span>
+    </div>
+
+    <div *ngSwitchCase="'edit'">
+        Edit Card
+    </div>
+</ng-container>

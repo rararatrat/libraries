@@ -1,0 +1,81 @@
+$fonts-path: "../fonts";
+$material-design-icons-font-directory-path: '~material-design-icons-iconfont/dist/fonts/';
+
+@font-face {
+  font-family: "Eagna";
+  src: url("#{$fonts-path}/Eagna-MediumItalic.woff2") format("woff2"),
+    url("#{$fonts-path}/Eagna-MediumItalic.woff") format("woff");
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Eagna";
+  src: url("#{$fonts-path}/Eagna-Bold.woff2") format("woff2"),
+    url("#{$fonts-path}/Eagna-Bold.woff") format("woff");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Eagna";
+  src: url("#{$fonts-path}/Eagna-Medium.woff2") format("woff2"),
+    url("#{$fonts-path}/Eagna-Medium.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Eagna UltraLight Condensed";
+  src: url("#{$fonts-path}/Eagna-UltraLightCondensed.woff2") format("woff2"),
+    url("#{$fonts-path}/Eagna-UltraLightCondensed.woff") format("woff");
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Eagna Light Condensed";
+  src: url("#{$fonts-path}/Eagna-LightCondensed.woff2") format("woff2"),
+    url("#{$fonts-path}/Eagna-LightCondensed.woff") format("woff");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Eagna";
+  src: url("#{$fonts-path}/Eagna-Italic.woff2") format("woff2"),
+    url("#{$fonts-path}/Eagna-Italic.woff") format("woff");
+  font-weight: normal;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Eagna";
+  src: url("#{$fonts-path}/Eagna-Regular.woff2") format("woff2"),
+    url("#{$fonts-path}/Eagna-Regular.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Eagna";
+  src: url("#{$fonts-path}/Eagna-BoldItalic.woff2") format("woff2"),
+    url("#{$fonts-path}/Eagna-BoldItalic.woff") format("woff");
+  font-weight: bold;
+  font-style: italic;
+  font-display: swap;
+}
+
+@import '~material-design-icons-iconfont/src/material-design-icons';
+.material-icons {
+  font-size: 18px !important;
+  direction: none;
+
+}

@@ -1,0 +1,559 @@
+/* 0. Color Array */
+$lightColorArr :(
+    eg-primary:#10069f,
+    eg-cobalt: #271bcb,
+    eg-secondary:#006dff,
+    eg-accent:#4f98ff,
+    eg-green:#819c00,
+    eg-light-green:#c4db3e,
+    eg-light-yellow:#ffffcc,
+    eg-turquoise:#007588,
+    eg-light-turquoise:#00bfbd,
+    eg-orange:#d83f11,
+    eg-light-orange:#ff7140,
+    eg-magenta:#e21d60,
+    eg-light-magenta:#fa4692,
+    eg-red:#ff0000,
+    eg-light-red:#ff6347,
+    eg-violet:#8c2ace,
+    eg-light-violet:#c15eff,
+    eg-light-grey:#f5f5f585,
+    eg-grey:#efeff4,
+    eg-grey2:#c8c7cc,
+    eg-grey3:#8a8a8f,
+    eg-grey4:#4d5156,
+    eg-yellow:#ffc914,
+    eg-white:#ffffff,
+    eg-black:#000000,
+    eg-warning: #ffc914,
+    eg-danger: #9f0000,
+    eg-danger-light: #fcadad,
+    eg-info:  #333333,
+    eg-success:  #006dff,
+    eg-good: #034f00f1,
+    eg-true: #819c00,
+    eg-false: #8a8a8f,
+    eg-unset: unset
+);
+
+$darkColorArr :(
+    eg-primary:#4f98ff,
+    eg-cobalt: #006dff,
+    eg-secondary:#4f98ff,
+    eg-accent:#4f98ff,
+    eg-green:#c4db3e,
+    eg-light-green:#c4db3e,
+    eg-turquoise:#c4db3e,
+    eg-light-turquoise:#c4db3e,
+    eg-light-yellow:#ffff00,
+    eg-orange:#d83f11,
+    eg-light-orange:#ff7140,
+    eg-magenta:#e21d60,
+    eg-light-magenta:#fa4692,
+    eg-red: #ff0000,
+    //eg-red: #ff6a00,
+    eg-light-red:#ff6347,
+    eg-violet:#8c2ace,
+    eg-light-violet:#c15eff,
+    eg-light-grey:#f5f5f585,
+    eg-grey:#0c0c0c,
+    eg-grey2:#5f5f5f,
+    eg-grey3:#ffffff,
+    eg-grey4:#ffffff,
+    eg-yellow:#ffc914,
+    eg-white: #424242,
+    eg-black: #ffffff,
+    warning: #ffc914,
+    danger: #ff0151,
+    danger-light: #fcadad,
+    info: #f5f5f5,
+    success: #006dff,
+    good: #61f95b,
+    true:#c4db3e,
+    false:#ffffff,
+    unset: unset
+);
+
+.bg-transparent {
+  background:transparent !important;
+}
+
+@each $ds, $ext in $lightColorArr {
+  .font-#{$ds} {
+    color: #{$ext} !important;
+  }
+  .bg-#{$ds} {
+    background-color: #{$ext} !important;
+    &.translucent{
+      background-color: #{$ext}21 !important;
+    }
+  }
+  .bg-#{$ds}.white{
+    background-color: #{$ext} !important;
+    color: white !important;
+  }
+  .bg-#{$ds}.black{
+    background-color: #{$ext} !important;
+    color: #888 !important;
+  }
+  .b-#{$ds} {
+    border-color: #{$ext} !important;
+  }
+  .badge-#{$ds} {
+    background-color: #{$ext} !important;
+    color:white !important;
+  }
+}
+
+@each $ds, $ext in $darkColorArr {
+  .dark .font-#{$ds} {
+    color: #{$ext} !important;
+  }
+  .dark .bg-#{$ds} {
+    background-color: #{$ext} !important;
+  }
+  .dark .bg-#{$ds}.white{
+    background-color: #{$ext} !important;
+    color: white !important;
+  }
+  .dark .bg-#{$ds}.black{
+    background-color: #{$ext} !important;
+    color: #888 !important;
+  }
+  .dark .b-#{$ds} {
+    border-color: #{$ext} !important;
+  }
+  .badge-#{$ds} {
+    background-color: #{$ext} !important;
+    color:white !important;
+  }
+}
+
+/* 1. Typography, Alignment, Others*/
+  
+  /* a. Font Weight & Styles */
+  @each $prop in (normal, bold, bolder, lighter, 100, 200, 300, 400, 500, 600, 700, 800, 900, inherit, initial, unset) {
+    .fw-#{$prop} {
+      font-weight: #{$prop} !important;
+    }
+  }
+  
+  @each $prop in (normal,italic,oblique,initial,inherit) {
+    .font-style-#{$prop} {
+      font-style: #{$prop} !important;
+    }
+  }
+  
+  @each $prop in (ultra-condensed,extra-condensed,condensed,semi-condensed,normal,semi-expanded,expanded,extra-expanded,ultra-expanded,initial,inherit) {
+    .font-stretch-#{$prop} {
+      font-stretch: #{$prop} !important;
+    }
+  }
+  
+  .font-urbanist{
+    font-family: 'Urbanist', sans-serif !important;
+  }
+  .bold {
+    font-weight: bold !important;
+  }
+  /* b. Font-Sizes & Line-Heights */
+  
+  @for $i from 1 through 64 {
+      $j: $i * 4%;
+
+      .fs-#{$i} {
+        font-size: #{$i}px !important;
+      }
+      .fs-#{$i}-em {
+        font-size: #{$i}em !important;
+      }
+      .fs-#{$i}-v {
+        font-size: #{$i}vh !important;
+      }
+      
+      .lh-#{$i} {
+        line-height: #{$i}px !important;
+      }
+      .lh-#{$i}-em {
+        line-height: #{$i}em !important;
+      }
+      .lh-#{$i}-p {
+        line-height: #{$j} !important;
+      }
+  }
+  
+  /* c. Text-Align & Float */
+  @each $prop in (top, right, bottom, left, center, none, unset) {
+      .text-#{$prop} {
+        text-align: #{$prop} !important;
+      }
+  
+      .pull-#{$prop}{
+        float: #{$prop} !important;
+      }
+  }
+  
+  .text-justify-word{
+    text-align: justify !important;
+    text-justify: inter-word !important;
+  }
+  .text-justify-char{
+    text-align: justify !important;
+    text-justify: inter-character !important;
+  }
+  
+  /* d. Text Indent, Decorators, trim */
+  @each $prop in (overline, line-through, underline, none, blink, dashed, dotted, double, inherit, initial, revert, solid, unset, wavy) {
+    .text-decoration-#{$prop} {
+      text-decoration: #{$prop} !important;
+    }
+  }
+  @each $prop in (none,capitalize,uppercase,lowercase,initial,inherit) {
+    .text-#{$prop} {
+      text-transform: #{$prop} !important;
+    }
+  }
+  
+  @for $i from 0 through 100 {
+    .text-indent-#{$i} {
+      text-indent: #{$i}px !important;
+    }
+    .text-indent-#{$i}-em {
+      text-indent: #{$i}em !important;
+    }
+  }
+  
+  
+  .trim-string{
+    width: inherit !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+  }
+  
+  .trim-string-no-width{
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+  }
+  
+  /* e. Cursor */
+  @each $prop in (pointer, crosshair, default, help, move, pointer, progress, text, wait, alias, not-allowed, all-scroll, grab, grabbing) {
+    .cursor-#{$prop} {
+      cursor: #{$prop} !important;
+    }
+  }
+  .grabbable {
+    cursor: move !important; /* fallback if grab cursor is unsupported */
+    cursor: grab !important;
+    cursor: -moz-grab !important;
+    cursor: -webkit-grab !important;
+  }
+  
+  /* (Optional) Apply a "closed-hand" cursor during drag operation. */
+  .grabbable:active {
+    cursor: grabbing !important;
+    cursor: -moz-grabbing !important;
+    cursor: -webkit-grabbing !important;
+  }
+  /* f. Letter Spacing */
+  @for $i from 1 through 100 {
+    .ls-#{$i} {
+      letter-spacing: #{$i}px !important;
+    }
+    $j: calc($i / 100);
+    .ls-#{$i}-em {
+      letter-spacing: #{$j}em !important;
+    }
+  }
+  
+  /* 2. Setting Margins, Padding, Border, position, height
+      e.g m-l-4 :
+          m-4
+          p-x-4
+  */
+  .eg-m-l-1{
+    margin-left:1px;
+  }
+  .eg-m-t-1{
+    margin-top:1px;
+  }
+  .eg-m-r-1{
+    margin-right:1px;
+  }
+  .eg-m-b-1{
+    margin-bottom:1px;
+  }
+  @each $prop, $abbrev in (margin: eg-m, padding: eg-p) {
+  
+    @for $index from 0 through 100 {
+      $size: $index * 4;
+      $length: #{$size}px;
+  
+      .#{$abbrev}-#{$size} {
+        #{$prop}: $length !important;
+      }
+  
+      .#{$abbrev}-x-#{$size} {
+        #{$prop}-right: $length !important;
+        #{$prop}-left: $length !important;
+      }
+  
+      .#{$abbrev}-y-#{$size} {
+        #{$prop}-top: $length !important;
+        #{$prop}-bottom: $length !important;
+      }
+  
+      .#{$abbrev}-t-#{$size} {
+        #{$prop}-top: $length !important;
+      }
+  
+      .#{$abbrev}-r-#{$size} {
+        #{$prop}-right: $length !important;
+      }
+  
+      .#{$abbrev}-b-#{$size} {
+        #{$prop}-bottom: $length !important;
+      }
+  
+      .#{$abbrev}-l-#{$size} {
+        #{$prop}-left: $length !important;
+      }
+    }
+  }
+  
+  
+  /* b. Border, Border-Radius */
+  @each $prop, $abbrev in (border: b) {
+  
+    @for $index from 0 through 64 {
+      $size: $index * 1;
+      $length: #{$size}px;
+  
+      .#{$abbrev}-#{$size} {
+        #{$prop}-width: $length !important;
+        #{$prop}-style: solid !important;
+      }
+  
+      .#{$abbrev}-x-#{$size} {
+        #{$prop}-right-width: $length !important;
+        #{$prop}-right-style: solid !important;
+        #{$prop}-left-width: $length !important;
+        #{$prop}-left-style: solid !important;
+      }
+  
+      .#{$abbrev}-y-#{$size} {
+        #{$prop}-top-width: $length !important;
+        #{$prop}-top-style: solid !important;
+        #{$prop}-bottom-width: $length !important;
+        #{$prop}-bottom-style: solid !important;
+      }
+  
+      .#{$abbrev}-t-#{$size} {
+        #{$prop}-top-width: $length !important;
+        #{$prop}-top-style: solid !important;
+      }
+  
+      .#{$abbrev}-r-#{$size} {
+        #{$prop}-right-width: $length !important;
+        #{$prop}-right-style: solid !important;
+      }
+  
+      .#{$abbrev}-b-#{$size} {
+        #{$prop}-bottom-width: $length !important;
+        #{$prop}-bottom-style: solid !important;
+      }
+  
+      .#{$abbrev}-l-#{$size} {
+        #{$prop}-left-width: $length !important;
+        #{$prop}-left-style: solid !important;
+      }
+    }
+  }
+  
+  @for $index from 0 through 100 {
+    $size: $index * 1;
+    $length: #{$size}px;
+  
+    .border-radius-#{$size} {
+      border-radius: $length !important;
+    }
+  }
+  @for $index from 0 through 10 {
+    $size: $index * 0.1;
+  
+    .opacity-#{$index} {
+      opacity:  $size !important;
+    }
+  }
+  @for $index from 0 through 20 {
+    $size: $index * 5%;
+  
+    .flex-b-#{$index*5} {
+      flex-basis:  $size !important;
+    }
+  }
+  @for $i from 0 through 20 {
+    $i-p: 5 * $i;
+    $size-p: 5% * $i;
+    .border-radius-#{$i-p}-p {
+      border-radius: $size-p !important;
+    }
+  }
+  
+  @each $prop, $abbrev in (border: b) {
+  
+    @each $design in (dotted, dashed, solid, double, groove, ridge, inset, outset, none, hidden) {
+      $size: 1;
+      $length: #{$size}px;
+  
+      .#{$abbrev}-#{$design} {
+        #{$prop}-style: $design !important;
+      }
+  
+      .#{$abbrev}-x-#{$design} {
+        #{$prop}-right-style: $design !important;
+        #{$prop}-left-style: $design !important;
+      }
+  
+      .#{$abbrev}-y-#{$design} {
+        #{$prop}-top-style: $design !important;
+        #{$prop}-bottom-style: $design !important;
+      }
+  
+      .#{$abbrev}-t-#{$design} {
+        #{$prop}-top-style: $design !important;
+      }
+  
+      .#{$abbrev}-r-#{$design} {
+        #{$prop}-right-style: $design !important;
+      }
+  
+      .#{$abbrev}-b-#{$design} {
+        #{$prop}-bottom-style: $design !important;
+      }
+  
+      .#{$abbrev}-l-#{$design} {
+        #{$prop}-left-style: $design !important;
+      }
+    }
+  }
+  
+  /* c. Positon */
+  @each $prop in (relative, absolute, static, fixed) {
+  
+    .position-#{$prop} {
+      position: #{$prop};
+    }
+  
+  }
+  
+  
+  /* d. Height & Width in percentages */
+  
+  @each $prop, $abbrev in (height: eg-h, width: eg-w,) {
+    @for $index from 0 through 180 {
+      $size: $index * 4;
+      $length: #{$size}px;
+  
+      .#{$abbrev}-#{$size} {
+        #{$prop}: $length !important;
+        min-#{$prop}: $length !important;
+        max-#{$prop}: $length !important;
+      }
+    }
+  
+    // Percentage
+    @for $i from 0 through 100 {
+      $i-p: 1 * $i;
+      $size-p: 1% * $i;
+  
+      .#{$abbrev}-#{$i-p}-p {
+        #{$prop}: $size-p !important;
+      }
+    }
+    // vw & vh
+    @for $i from 0 through 100 {
+      $i-p: 1 * $i;
+      $length: #{$i-p}v#{$abbrev};
+      .#{$abbrev}-#{$i-p}-v {
+        #{$prop}: $length !important;
+        max-#{$prop}: $length !important;
+        min-#{$prop}: $length !important;
+      }
+    }
+  }
+  
+  
+  @for $index from 0 through 180 {
+      $size: $index * 4;
+      $length: #{$size}px;
+  
+      .eg-wh-#{$size} {
+        height: $length !important;
+        width: $length !important;
+        min-height: $length !important;
+        max-height: $length !important;
+        min-width: $length !important;
+        max-width: $length !important;
+      }
+  }
+  
+    // Percentage
+    @for $i from 0 through 100 {
+      $i-p: 1 * $i;
+      $size-p: 1% * $i;
+  
+      .eg-wh-#{$i-p}-p {
+        height: $size-p !important;
+        width: $size-p !important;
+        min-height: $size-p !important;
+        max-height: $size-p !important;
+        min-width: $size-p !important;
+        max-width: $size-p !important;
+      }
+    }
+    //vw & vh
+    @for $i from 0 through 100 {
+      $i-p: 1 * $i;
+  
+      .eg-wh-#{$i-p}-v {
+        min-height: #{$i-p}vh !important;
+        min-width: #{$i-p}vh !important;
+        max-height: #{$i-p}vw !important;
+        max-width: #{$i-p}vw !important;
+        height: #{$i-p}vh !important;
+        width: #{$i-p}vw !important;
+      }
+    }
+  
+  
+  /* e. Full Width & Height */
+  .scroll-y{
+    overflow-y:scroll;
+  }
+  .no-scroll-y{
+    overflow-y:hidden;
+  }
+  .scroll-x{
+    overflow-x:scroll;
+  }
+  .no-scroll-x{
+    overflow-x:hidden;
+  }
+  .full-width{
+    width: 100% !important;
+  }
+  .full-height{
+    height: 100% !important;
+  }
+  .fill-height{
+    height: -webkit-fill-available;
+  }
+  .mat-tab-group.mat-tab-full-height .mat-tab-body-wrapper {
+    flex: 1 1 100%;
+  }
+  .full-screen{
+    width: 100% !important;
+    height: 100% !important;
+  }

@@ -1,0 +1,29 @@
+.fs-10 {
+    font-size : 10px;
+}
+
+.lh-18 {
+    line-height: 18px;
+}
+
+.mat-button-toggle-group{
+    border: 0px !important;
+}
+/* :host ::ng-deep{
+    .pi{
+        font-size:21px !important;
+    }
+} */
+::ng-deep.ag-cell-custom .p-button{
+    vertical-align: inherit !important;
+    font-size: 12px;
+}/* 
+::ng-deep.ag-cell-custom .p-button{
+    vertical-align: inherit !important;
+    font-size: 12px;
+} */
+:host ::ng-deep{
+    .pi{
+        font-size: 14px !important;
+    }
+}

@@ -1,0 +1,59 @@
+<div class="ag-custom-panel text-left h-80-p">
+    <div class="flex flex-column m-4">
+    <button #btn type="button" pButton label="'Turn ' + (isPivotMode ? 'off' : 'on') +  'Pivot Mode'" (click)="toggleAnalysisMode()"></button>
+
+    </div>
+    <div class="m-y-12" [ngSwitch]="chartObj.isLoading">
+        <ng-container *ngSwitchDefault [ngSwitch]="chartList && chartList | isNotEmpty">
+            <ng-container *ngSwitchDefault>
+                <div class="fw-500 fs-14 p-x-4 p-y-8">Available Charts</div>
+                <div class="fs-13 cursor-pointer p-l-4" [title]="!isPivotMode ? 'Turn on Pivot Mode to use this feature.' : ''"
+                    *ngFor="let chart of chartList">
+                    <span [class.cursor-not-allowed]="!isPivotMode" (click)="loadChart(chart)"> [toolTip]="(chart.isGlobal ? 'This chart is public and made accessible to everyone' : 'This chart is only visible to ' + chart?.user + ' as the chart owner')"
+                        <span *ngIf="chart | isNotEmpty" class="pi" [class.pi-public]="chart.isGlobal" [class.pi-person]="!chart.isGlobal" aria-label="Chart accessibility" [title]="'Created by: ' + chart?.user"></span>
+                        <span [innerHTML]="chart.title"></span>
+                        <span *ngIf="!(chart?.charts | isNotEmpty)" class='ag-icon ag-icon-pivot fs-12 pull-right' aria-label="Pivot Only" title='Pivot View Only'></span>
+                        <sup *ngIf="chart?.charts?.length > 1" class="pull-right" [title]="'Charts'">+{{(chart?.charts?.length - 1)}}</sup> 
+                        <span *ngIf="chart?.charts | isNotEmpty" class='ag-icon ag-icon-chart fs-12 pull-right' title="{{'Chart' + (chart?.charts?.length | plural)}}"></span>                        
+                    </span>
+                </div>
+            </ng-container>   
+            <ng-container *ngSwitchCase="false">
+                <div class="fw-500 fs-14 p-x-4 p-y-8">No Chart Available</div>
+            </ng-container>
+        </ng-container>
+        <ng-container *ngSwitchCase="true">
+            <span class="fw-500 fs-14 p-x-4 p-y-8">Loading Grid Charts...</span>
+        </ng-container>
+
+        <div class="fw-500 p-x-4 p-y-8"><!-- {{isPivotMode}} {{currentId}} --></div>
+            <div class="p-x-4" [pTooltip]="!isPivotMode ? 'Turn on Pivot Mode to use this feature.' : ''"><label>{{currentId ? 'Save current' : 'Create new'}} chart / pivot</label></div>
+            <input pInputText #newChartTitle style="padding: 2px; margin: 2px" type="text" autofocus
+                [placeholder]="'e.g. BAMs raised per Project'" [(ngModel)]="newTitle" (ngModelChange)="onTitleChange($event)"
+                id="newChartTitle" [disabled]="!isPivotMode || isDisabled"/> 
+
+            <!-- <mat-checkbox matPrefix class="inline mat-24 span p-l-4" span *ngIf="isPivotMode" [(ngModel)]="publish" [class.cursor-not-allowed]="!isPivotMode" tooltipPosition="above" [pTooltip]="!isPivotMode ? 'Turn on Pivot Mode to use this feature.' : 'Publish the chart to be accessible to all users'"></mat-checkbox> -->            
+            <button *ngIf="isPivotMode && currentId" span-button matSuffix (click)="cancelSave()" pTooltip="Clear the reference to the loaded chart to create a New Chart." [disabled]="!isPivotMode">
+                <span class="mat-24 pi pi-clear" aria-label="Cancel icon"></span>
+            </button>
+
+            <button *ngIf="isPivotMode" [class.cursor-not-allowed]="!isPivotMode || !newTitle || isDisabled" [disabled]="!isPivotMode || !newTitle || isDisabled" mat-button span-button (click)="publish = !publish" 
+                class="inline mat-24" tooltipPosition="above" [pTooltip]="(currentId ? 'This chart is currently' : 'The new chart will be') + (!publish ? ' private and cannot be accessed by other users.' : ' published and can be accessed by all users.') + ' Click to toggle then save to apply the change.'"><span class="font-eg-accent p-0">{{(publish ? 'public' : 'person')}}</span></button>
+            <button [disabled]="!isPivotMode || !newTitle || isDisabled" [class.cursor-not-allowed]="!isPivotMode || !newTitle || isDisabled" mat-button span-button (click)="saveChart(newTitle)" 
+                class="inline mat-24"><span tooltipPosition="above" [pTooltip]="!isPivotMode ? 'Turn on Pivot Mode to use this feature.' : (currentId ? 'Override the current chart.' : 'Save new chart.')" class="font-success p-0">save</span></button>
+            <button *ngIf="isPivotMode && currentId" [disabled]="isDisabled" [class.cursor-not-allowed]="isDisabled" mat-button span-button (click)="deleteChart()" tooltipPosition="above" [pTooltip]="!isPivotMode ? 'Turn on Pivot Mode to use this feature.' : 'Delete the current Chart.'">
+                <span class="inline mat-24 font-danger pi pi-delete" aria-label="Delete icon"></span>
+            </button>
+        </div>
+
+        <div class="flex full-width m-4" *ngIf="isPivotMode">
+            <div class="flex flex-b-80">
+                <span *ngIf="last_update">Cache Last Update: {{last_update | date : 'dd.MM.yyyy HH:mm'}}</span>
+            </div>
+            <div class="flex flex-b-10">
+                <button mat-button span-button (click)="toggleAnalysisMode(true)" tooltipPosition="above" [pTooltip]="'Reload Data'">
+                    <span class="inline mat-24 font-success pi-refresh">refresh</span>
+                </button>
+            </div>        
+        </div>
+</div>

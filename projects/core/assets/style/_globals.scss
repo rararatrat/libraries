@@ -1,0 +1,34 @@
+@import "./settings";
+
+$isDark                     : isDarkMode($isDark);
+$darkMode                   : $isDark;
+$theme-color                : if($darkMode, #1d1d1d,#fafafa);//settings($darkMode, false, $theme, 50);
+$background-color           : if($darkMode, #1d1d1d,#fafafa);
+$plain                      : if($darkMode, #1d1d1d,#fafafa);
+
+:root, *{
+
+      -webkit-font-smoothing      : subpixel-antialiased;
+      backface-visibility         : hidden;
+      box-sizing                  : border-box;
+      #{--app-logo}               : "assets/img/eg_rd_black.png";
+      #{--mode}                   : $isDark;
+      #{--mode-dark}              : $darkMode;
+      #{--bg-color}               : $background-color;
+      #{--form-color}             : if($darkMode, #121212,#ffffff);
+      #{--panel-bg}               : panelBgColor($darkMode, true, $theme-color);
+      #{--default-grey}           : if($darkMode, #484848,#e9e9e9);
+
+      #{--box-shadow-one}         : boxShadowColor($isDark, 0.2);
+      #{--box-shadow-two}         : boxShadowColor($isDark, 0.141);
+      #{--box-shadow-three}       : boxShadowColor($isDark, 0.122);
+
+      #{--plain}                  : $plain;
+      #{--plain-color}            : $plain;
+      #{--plain-contrast}         : contrast-color($plain, $contrast-threshold);
+      #{--plain-faded}            : fade-color($plain, $fade-threshold);
+      /* New Variables : End */
+  }
+
+@import "./config";
+@import "./stylesheet";

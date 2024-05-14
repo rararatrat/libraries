@@ -1,0 +1,47 @@
+
+/* Functions */
+@function isDarkMode($isDark:false) {
+  $result: $isDark;
+  @return $result;
+}
+
+@function boxShadowColor($isDarkMode:false, $number) {
+  $result: "";
+  @if($isDarkMode){
+      $result : rgba(#8b8b8b, $number);
+
+  } @else {
+      $result : rgba(#000000, $number);
+  }
+
+  @return $result;
+}
+
+@function panelBgColor($isDarkMode:false, $hasContrast:false, $color) {
+  $result: "";
+  $opacity: var(--eg-opacity);
+  @if($isDarkMode){
+      $result : rgba(#ffffff, $opacity);
+  } @else {
+      $result : rgba(#000000, $opacity);
+  }
+
+  @return $result;
+}
+
+$contrast-threshold         : 55%;
+$saturate-threshold         : 80%;
+$fade-threshold             : 90%;
+
+@function contrast-color($color:#ffffff, $threshold) {
+  @return if(lightness($color) < $threshold, #ffffff, #000000);
+}
+
+@function saturate-color($color:#ffffff, $threshold) {
+  @return saturate($color, $threshold);
+}
+
+@function fade-color($color, $threshold) {
+  @return mix(white, $color, $threshold);
+  /* @return hsla(hue($color), saturation($color), lightness($color), 0.1); */
+}

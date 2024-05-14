@@ -1,0 +1,12 @@
+<div class="w-400 h-400">
+    <eag-grid [isDebug]="false"
+        [(gridParams)]="gridParams"
+        #gridServerSide
+        [id]="gridId"
+        class="h-full w-full"
+        [digitsInfo]="'.2'"
+        [gridId]="gridId"
+        [apiCallParams]="apiCallParams"
+        [rowModelType]="'serverSide'">
+    </eag-grid>
+</div>

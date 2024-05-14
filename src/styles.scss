@@ -1,0 +1,89 @@
+
+@import 'ag-grid-community/dist/styles/ag-grid.css';
+/* @import 'ag-grid-autocomplete-editor/dist/main.css'; */
+@import "./assets/styles/helper";
+/* @import "~ag-grid-community/src/styles/webfont/agGridClassicFont.scss"; */
+@import "flag-icons/css/flag-icons.min.css";
+/* body {
+	@include eagna-theme(true, $theme, $grey, $danger,  $info, $primary, $secondary, $success, $warn)
+}*/
+  // Global scrollbar
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+    z-index: 50000;
+  }
+  ::-webkit-scrollbar:hover {
+    width : 10px;
+    height: 10px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 3px;
+  }
+
+  /* Handle on hover */
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+    width: 10px !important;
+    height : 10px !important;
+  }
+/* *{
+  --primary:#000000 !important;
+
+} */
+
+.light {
+	$isDark : false;
+
+	@import "projects/core/assets/style/globals";
+	@import "ag-grid-community/dist/styles/ag-theme-balham.min";
+	@import "ag-grid-community/dist/styles/ag-theme-alpine.min";
+	@import "ag-grid-community/dist/styles/ag-theme-blue.min";
+	@import "ag-grid-community/dist/styles/ag-theme-bootstrap.min";
+	@import "ag-grid-community/dist/styles/ag-theme-fresh.min";
+
+	.ag-theme-balham{
+		/* @import "~ag-grid-community/src/styles/webfont/agGridBalhamFont.scss"; */
+	}
+	.ag-theme-alpine{
+		/* @import "~ag-grid-community/src/styles/webfont/agGridAlpineFont"; */
+	}
+
+ @import "assets/styles/config";
+  font-family:'Roboto';
+  $opacity: 0.1;
+  background-color: if($darkMode, #1a1b1c,#ffffff);
+  color: black;
+}
+
+.dark {
+	$isDark : true;
+	/* font-family: 'Roboto'; */
+	$opacity: 0.1;
+	@import "projects/core/assets/style/globals";
+	@import "ag-grid-community/dist/styles/ag-theme-balham-dark.min";
+	@import "ag-grid-community/dist/styles/ag-theme-alpine-dark.min";
+	.ag-theme-balham{
+		/* @import "~ag-grid-community/src/styles/webfont/agGridBalhamFont"; */
+	}
+	.ag-theme-alpine{
+		/* @import "~ag-grid-community/src/styles/webfont/agGridAlpineFont"; */
+	}
+	/* @import "ag-grid-community/dist/styles/ag-theme-dark.min"; */
+
+  @import "assets/styles/config";
+
+  font-family:'Roboto';
+  $opacity: 0.1;
+  background-color: if($darkMode, #222222,#ffffff);
+	color: white;
+ }

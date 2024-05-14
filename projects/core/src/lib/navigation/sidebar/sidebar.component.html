@@ -1,0 +1,200 @@
+<div  class="flex flex-column eag-sidebar-class h-full"
+      [class.eag-sidebar-hide]="!isVisible"
+      [class.w-8rem]="mode == 'compact' && !isExpanded"
+      [class.w-5rem]="mode == 'thin' && !isExpanded"
+      [class.w-18rem]="mode == 'list' || isExpanded"
+      >
+
+      <!-- Sidebar Header -->
+      <div class="flex flex-grow-0 w-full p-2 "
+          [class.justify-content-center]="!isList"
+          [class.px-4]="isList"
+          *ngIf="isVisible">
+        <div class="">
+          <ng-content select="[sbImage]"></ng-content>
+        </div>
+        <div *ngIf="isList" class=" flex-grow-1 pl-2" >
+          <ng-content select="[sbDetails]"></ng-content>
+        </div>
+      </div>
+
+      <!-- Sidebar content -->
+      <div  class="flex-grow-1 overflow-hidden sidebar-content" *ngIf="isVisible">
+        <!-- Menu Sidebar -->
+
+        <ng-container *ngIf="isList || isExpanded">
+          <p-scrollPanel styleClass="h-full" class="h-full">
+            <div *ngFor="let item of items;  trackBy: trackByFn; let idx=index" class="px-2 pb-2 listMenuWrapper">
+              <ng-container [ngTemplateOutlet]="sidebarListMenu" [ngTemplateOutletContext]="{$implicit: {data:item, index:idx, isOverlay: false}}"></ng-container>
+            </div>
+          </p-scrollPanel>
+         </ng-container>
+
+        <!-- Thin & Compact Sidebar -->
+        <ng-container  *ngIf="!isList">
+          <p-scrollPanel styleClass="h-full" class="h-full">
+            <ng-container *ngFor="let a of items; trackBy: trackByFn; let idx = index">
+
+              <div  *ngIf="a.hasOwnProperty('items') && a.items | isNotEmpty"
+                    [class]="'flex flex-column align-items-center  sidebar-items'"
+                    [ngClass]="{'compact':isCompact, 'thin':isThin}"
+                    [class.active]="isParentRoute(a)"
+                    [class.disabled]="a?.disabled"
+                    (click)="showmenu($event, {data:a, index:idx})">
+
+                  <div class=" flex-grow-1 flex align-items-center">
+                    <i [class]="a?.icon + ' icon'"></i>
+                  </div>
+                  <div class="label">
+                    <span [pTooltip]="a?.tooltip" [innerHTML]="a?.label"></span>
+                  </div>
+              </div>
+
+              <div  *ngIf="!(a.items | isNotEmpty)"
+                    class="flex flex-column align-items-center  sidebar-items"
+                    [class.disabled]="a?.disabled"
+                    [ngClass]="{'compact':isCompact, 'thin':isThin}"
+                    [routerLink]="a?.disabled? ['/'] :a?.routerLink"
+                    [routerLinkActive]="'active'"
+                    [routerLinkActiveOptions]="a?.routerLinkActiveOptions">
+                  <div class=" flex-grow-1 flex align-items-center">
+                    <i [class]="a?.icon + ' icon'"></i>
+                  </div>
+                  <div class="label">
+                    <span [pTooltip]="a?.tooltip" [innerHTML]="a?.label"></span>
+                  </div>
+              </div>
+
+            </ng-container>
+        </p-scrollPanel>
+
+        <p-overlayPanel id="op" #op
+                        [appendTo]="'body'"
+                        styleClass="sidebarOverlayMenu h-full max-h-screen overflow-hidden"
+                        [dismissable]="true"
+                        [showTransitionOptions]="'0s cubic-bezier(0, 0, 0, 0)'"
+                        [hideTransitionOptions]="'0s linear'">
+          <ng-template pTemplate="content">
+
+            <div class="flex flex-column h-full m-1 overflow-hidden">
+              <!-- Overlay Panel Header -->
+              <div class="flex flex-grow-0 ml-3 mt-2">
+                <i *ngIf="!(selectedData?.routerLink | isNotEmpty)"
+                        [class]="selectedData?.icon + ' overlay-listmenu-header'">
+                </i>
+                <span *ngIf="!(selectedData?.routerLink | isNotEmpty)"
+                        class="ml-2 overlay-listmenu-header" [innerHTML]="selectedData?.label">
+                </span>
+
+                <a *ngIf="selectedData?.routerLink | isNotEmpty"
+                    class="overlay-listmenu-header"
+                    [routerLink]="selectedData?.disabled? ['/'] :selectedData?.routerLink">
+
+                    <i [class]="selectedData?.icon + ' overlay-listmenu-header'"> </i>
+                    <span class="ml-2 overlay-listmenu-header"
+                          [innerHTML]="selectedData?.label">
+                    </span>
+                </a>
+              </div>
+
+              <p-divider styleClass="overlay-listmenu-divider"></p-divider>
+
+              <div class="flex-grow-1 overflow-hidden h-full">
+                <p-scrollPanel [style]="{ width: '100%', height: 'calc(100vh - 6rem)' }">
+                  <div *ngFor="let item of selectedData?.items;  trackBy: trackByFn; let idx=index" class="px-2 pb-2 listMenuWrapper">
+                    <ng-container [ngTemplateOutlet]="sidebarListMenu" [ngTemplateOutletContext]="{$implicit: {data:item, index:idx, isOverlay: true}}"></ng-container>
+                  </div>
+
+                </p-scrollPanel>
+              </div>
+            </div>
+          </ng-template>
+        </p-overlayPanel>
+
+      </ng-container>
+
+
+      </div>
+
+      <!-- Sidebar Footer -->
+      <div *ngIf="isVisible" class="flex-grow-0 align-self-center  w-full p-2 border-top-1 sidebar-border">
+        <div class="sidebar-footer flex justify-content-center" (click)="expand()">
+          <span class="mr-2 align-self-center" *ngIf="mode!='thin'" [innerHTML]="('translations.' + (isExpanded ? 'collapse' : 'expand')) | translate"></span>
+          <i class="align-self-center fa-solid fa-{{(isExpanded)?'angles-left':'angles-right'}}"></i>
+        </div>
+      </div>
+
+</div>
+
+<ng-template #sidebarListMenu let-item>
+  <!-- Parent Node Top Menu -->
+  <div *ngIf="!item?.data.separator; else separator"
+        class="listMenu flex flex-row p-3 text-base"
+        [class.active]="item?.data.expanded || isParentRoute(item.data)"
+        [class.listMenu-disabled]="item?.data.disabled"
+        (click)="itemToggle(item, item.isOverlay)"
+     >
+      <span class="icon align-items-center flex">
+        <i [class]="'p-menuitem-icon ' +item?.data.icon"></i>
+      </span>
+      <span class="align-items-center flex title p-menuitem-text flex-grow-1" [pTooltip]="item?.data?.tooltip" [innerHTML]="item?.data.label"></span>
+
+      <i  *ngIf="item?.data.items"
+          class="align-items-center flex order-1 fa-solid fa-{{item?.data.expanded == true ? 'angle-down' : 'angle-right'}}">
+      </i>
+  </div>
+
+  <!-- IF It Needs  Seprator -->
+  <ng-template #separator>
+    <div class="listMenu-border my-2 "></div>
+  </ng-template>
+
+  <!-- Recursive Child Menu Nodes For Each Parent -->
+  <div *ngIf="item.data.items && item.data.expanded" class="sidebar-bg mt-2">
+    <p-panelMenu
+          #menuSidebar
+          id="menuSidebar"
+          styleClass="mt-2"
+          [multiple]="false"
+          [model]="item.data.items">
+          <ng-template pTemplate="submenuicon">
+            <span class="eg-icon eg-closed flex-order-1">
+              <i class="fa-solid fa-angle-right"></i>
+            </span>
+            <span class="eg-icon eg-open flex-order-1">
+              <i class="fa-solid fa-angle-down"></i>
+            </span>
+          </ng-template>
+    </p-panelMenu>
+  </div>
+</ng-template>
+
+
+
+<!-- Legacy Code -->
+<!-- <ng-template #menuItem let-item></ng-template> -->
+
+
+<!-- <p-panelMenu id="menuSidebar"
+      styleClass="mt-2 overlay-listmenu-panelmenu"
+      [multiple]="false"
+      [model]="selectedData?.items">
+</p-panelMenu> -->
+
+<!-- Legacy Menu which didn't work for scrolling -->
+
+<!-- <p-tieredMenu #tieredMenu
+              styleClass="bg-primary"
+              [autoDisplay]="true"
+              [autoZIndex]="false"
+              [popup]="false"
+              appendTo="body"
+              *ngIf="!isList && !isExpanded"
+              [id]="mode == 'compact' ? 'tieredSidebar' : 'tieredSidebarThin'"
+              [model]="items"
+              >
+              <ng-template pTemplate="submenuicon">
+                <i class="pi pi-chevron-right p-element p-icon-wrapper anglerighticon"></i>
+              </ng-template>
+  </p-tieredMenu> -->
+

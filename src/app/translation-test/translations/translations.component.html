@@ -1,0 +1,51 @@
+<div class="w-full h-full" *ngIf="loaded?.isLoaded">
+    <h5>Translations:</h5>
+    <div class="m-2">Simple translation: 
+        <div>HTML 'Accounting': <span [innerHTML]="'translations.accounting' | translate"></span>
+        <ng-container [ngTemplateOutlet]="codeSnippet" [ngTemplateOutletContext]="{$implicit: translate_accounting_code}"></ng-container>  
+        </div>
+        <div>TS 'Account': <span [innerHTML]="translateAccount"></span></div>
+        <ng-container [ngTemplateOutlet]="codeSnippet" [ngTemplateOutletContext]="{$implicit: translate_account_code}"></ng-container>
+    </div>
+
+    <div class="m-2 p-t-2">Plural: 
+        <div>HTML</div>
+        <div>'Security': <span [innerHTML]="'translations.security' | translate : {count: 1}"></span></div>
+        <ng-container [ngTemplateOutlet]="codeSnippet" [ngTemplateOutletContext]="{$implicit: translate_security_code}"></ng-container>  
+
+        <div>'Securities': <span [innerHTML]="'translations.security' | translate : {count: 2}"></span></div>
+        <ng-container [ngTemplateOutlet]="codeSnippet" [ngTemplateOutletContext]="{$implicit: translate_securities_code}"></ng-container>
+
+        <div>TS</div>
+        <div>'Credit Note': <span [innerHTML]="creditNote"></span></div>
+        <ng-container [ngTemplateOutlet]="codeSnippet" [ngTemplateOutletContext]="{$implicit: translate_credit_note}"></ng-container>  
+        <div>'Credit Notes': <span [innerHTML]="creditNotes"></span></div>
+        <ng-container [ngTemplateOutlet]="codeSnippet" [ngTemplateOutletContext]="{$implicit: translate_credit_notes}"></ng-container>  
+    </div>
+
+    <div class="m-2 p-t-2">Selection: 
+        <div>HTML</div>
+        <div>'He is': <span [innerHTML]="'translations.people' | translate : { gender: 'male', how: ('translations.funny' | translate) }"></span></div>
+        <ng-container [ngTemplateOutlet]="codeSnippet" [ngTemplateOutletContext]="{$implicit: translate_html_he_is}"></ng-container>  
+        <div>'She is': <span [innerHTML]="'translations.people' | translate : { gender: 'female', how: ('translations.charming' | translate) }"></span></div>
+        <ng-container [ngTemplateOutlet]="codeSnippet" [ngTemplateOutletContext]="{$implicit: translate_html_she_is}"></ng-container>  
+        <div>'They are': <span [innerHTML]="'translations.people' | translate : { gender: 'heshe', how: ('translations.lovely' | translate) }"></span></div>
+        <ng-container [ngTemplateOutlet]="codeSnippet" [ngTemplateOutletContext]="{$implicit: translate_html_they_are}"></ng-container>  
+        
+        <div>TS</div>
+        <div>'He is': <span [innerHTML]="people?.he"></span></div>
+        <ng-container [ngTemplateOutlet]="codeSnippet" [ngTemplateOutletContext]="{$implicit: translate_ts_he_is}"></ng-container>  
+        <div>'She is': <span [innerHTML]="people?.she"></span></div>
+        <ng-container [ngTemplateOutlet]="codeSnippet" [ngTemplateOutletContext]="{$implicit: translate_ts_she_is}"></ng-container>  
+        <div>'They are': <span [innerHTML]="people?.they"></span></div>
+        <ng-container [ngTemplateOutlet]="codeSnippet" [ngTemplateOutletContext]="{$implicit: translate_they_are}"></ng-container>  
+    </div>
+</div>
+
+<ng-template #codeSnippet let-code>
+<pre>
+<code class="bg-black-alpha-20">
+{{ code }}
+</code>
+</pre>
+</ng-template>

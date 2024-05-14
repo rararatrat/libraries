@@ -1,0 +1,64 @@
+
+*{
+  /* New Variables : Start */
+  #{--theme-color}            : if($darkMode, #2c2c2c,#ffffff);
+  #{--app-logo}               : "assets/img/eg_rd_black.png";
+  #{--primary}                : #006dff;
+  #{--primary-color}          : #006dff;
+  #{--primary-contrast}       : contrast-color(#006dff, $contrast-threshold);
+  #{--primary-faded}          : fade-color(#006dff, $fade-threshold);
+
+  #{--secondary}              : #10069f;
+  #{--secondary-color}        : #10069f;
+  #{--secondary-contrast}     : contrast-color(#10069f, $contrast-threshold);
+  #{--secondary-faded}        : fade-color(#10069f, $fade-threshold);
+
+  #{--danger}                 : #9f0000;
+  #{--danger-color}           : #9f0000;
+  #{--danger-contrast}        : contrast-color(#9f0000, $contrast-threshold);
+  #{--danger-faded}           : fade-color(#9f0000, $fade-threshold);
+
+  #{--success}                : #034f00;
+  #{--success-color}                : #034f00;
+  #{--success-contrast}       : contrast-color(#034f00, $contrast-threshold);
+  #{--success-faded}          : fade-color(#034f00, $fade-threshold);
+
+  #{--warn}                   : #f0ad4e;
+  #{--warn-color}             : #f0ad4e;
+  #{--warn-contrast}          : contrast-color(#f0ad4e, $contrast-threshold);
+  #{--warn-faded}             : fade-color(#f0ad4e, $fade-threshold);
+
+  #{--help}                   : #aaaaaa;
+  #{--help-color}             : #aaaaaa;
+  #{--help-contrast}          : contrast-color(#aaaaaa, $contrast-threshold);
+  #{--help-faded}             : fade-color(#aaaaaa, $fade-threshold);
+
+  #{--info}                   : #0000FF;
+  #{--info-color}             : #0000FF;
+  #{--info-contrast}          : contrast-color(#0000FF, $contrast-threshold);
+  #{--info-faded}             : fade-color(#0000FF, $fade-threshold);
+
+  #{--plain}                  : $plain;
+  #{--plain-color}            : $plain;
+  #{--plain-contrast}         : contrast-color($plain, $contrast-threshold);
+  #{--plain-faded}            : fade-color($plain, $fade-threshold);
+
+  #{--border-color}           :  if(lightness($theme-color) < 55%, #3c4043,#ebebeb);
+  #{--disabled-color}         :  if($darkMode, #303134,#dfe1e5);
+  #{--active-font-weight}     :  bold;
+
+  #{--eg-icon-font}           :   'PrimeIcons';
+  #{--font-family}            :   'Roboto';
+  #{--eg-opacity}             :   0.1;
+  #{--eg-border-radius}       :   7px; //RT $border-radius;
+  #{--eg-overlay-bg}          :   rgb(0 0 0 / 50%);
+
+  #{--menuWidth}              : 20rem;
+  #{--menuCompactWidth}       : 8rem;
+  #{--menuThinWidth}          : 5rem;
+
+  #{--sidebar}                : #1e1e1e;
+  #{--sidebar-contrast}       : contrast-color(#1e1e1e, 55%);
+  #{--sidebar-tint}           : rgb(255 255 255 / 0.12);
+
+}

@@ -1,0 +1,7 @@
+.item-edit {
+    z-index: 10000;
+    visibility: hidden;
+}
+.line-item:hover .item-edit{
+    visibility: visible;
+}

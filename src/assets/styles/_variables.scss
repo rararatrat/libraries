@@ -1,0 +1,27 @@
+&{
+  background-color      : if($darkMode, #222222,#fafafa);
+	color                 : if($darkMode, #fafafa,#1a1b1c);
+  #{--border-color}     : if($darkMode, #303134,#dfe1e5);
+  #{--disabled-color}   : if($darkMode, #303134,#dfe1e5);
+  #{--default-grey}     : if($darkMode, #484848,#e9e9e9);
+}
+
+
+.ag-theme-alpine{
+  font-family: var(--font-family);
+  font-size: var(--resolution);
+  .ag-row{
+    font-size: var(--resolution);
+  }
+}
+.ag-theme-balham {
+  font-family: var(--font-family);
+  font-size: var(--resolution);
+  .ag-row{
+    font-size: var(--resolution);
+  }
+}
+/* .p-component {
+  background-color: transparent;
+}
+ */

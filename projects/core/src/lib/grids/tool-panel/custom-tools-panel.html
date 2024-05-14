@@ -1,0 +1,82 @@
+<div class="ag-custom-panel text-left h-80-p">
+    <!-- <div class="m-t-12 m-b-16">
+        <div class="fw-500  p-x-4">Search</div>
+        <div *ngIf="params.enableGridSearch" >
+            <input #searchInput style="padding: 2px; margin: 2px" class="eg-w-94-p" type="text" autofocus
+                [placeholder]="('translations.searchGrid' | translate) + '...'"
+                id="customSearch" ref="customSearch" name="customSearch"/>
+        </div>
+    </div> -->
+    <div style="display: inline">
+        <span class="p-input-icon-left full-width">
+            <i class="fa fa-search"></i>
+            <input #searchInput type="text" class="full-width" pInputText [placeholder]="'translations.search' | translate">
+        </span>
+    </div>
+
+    <div class="full-width flex align-items-center bold pl-1 pt-1">
+        <!-- <span *ngIf="!lData?.isCollapsed" class="align-items-center flex flex-1"></span> -->
+        <span class="full-width flex flex-1" [innerHTML]="'translations.viewSettings' | translate"></span>
+    </div>
+
+    <div class="full-width flex">
+        <span class="pl-1" [innerHTML]="'translations.columns' | translate"></span>
+        <span class="flex full-width justify-content-end">
+            <button type="button" pButton pRipple [pTooltip]="'translations.clearColumnsAndSorting' | translate" class="p-button-rounded p-button-danger p-button-text" icon="pi pi-trash" (click)="clearColumns()"></button>
+            <button type="button" pButton pRipple [pTooltip]="'translations.saveColumnsAndSorting' | translate" class="p-button-rounded p-button-info p-button-text" icon="pi pi-save"(click)="saveColumns()"></button>
+        </span>
+    </div>
+
+    <div class="full-width flex">
+        <span class="pl-1" [innerHTML]="'translations.filters' | translate"></span>
+        <span class="flex full-width justify-content-end">
+            <button type="button" pButton pRipple [pTooltip]="'translations.clearFilters' | translate" class="p-button-rounded p-button-danger p-button-text" icon="pi pi-trash" (click)="clearFilters()"></button>
+            <button type="button" pButton pRipple [pTooltip]="'translations.saveFilters' | translate" class ="p-button-rounded p-button-info p-button-text"  icon="pi pi-save"(click)="saveFilters()" [class.cursor-not-allowed]="params.isSaveFilterDisabled" [disabled]="params.isSaveFilterDisabled" [title]="params.isSaveFilterDisabled ? 'Saving of filter is not allowed when Pivoting' : ''"></button>
+        </span>
+    </div>
+
+    <div class="full-width flex">
+        <span class="pl-1 full-width" [innerHTML]="'translations.updateTheme' | translate"></span>
+        <span class="flex full-width justify-content-end pr-1">
+            <p-dropdown [pTooltip]="isUserGlobalGridPrefEnabled ? ('translations.updateThemeDisabled' | translate) : ''" [styleClass]="isUserGlobalGridPrefEnabled ? 'bg-gray-500' : ''" [options]="[{value: 'balham', label: 'Balham'}, {value: 'alpine', label: 'Alpine'}]" [(ngModel)]="savedTheme" optionLabel="label"
+                        [readonly]="isUserGlobalGridPrefEnabled" [showClear]="!isUserGlobalGridPrefEnabled" ></p-dropdown> <!-- (ngModelChange)="saveTheme()" -->
+        </span>
+    </div>
+
+    <div class="m-y-12">
+        <!-- <div class="fw-500 p-x-4 p-y-8">{{'translations.viewSettings' | translate}}</div> -->
+        <table class="full-width">
+            <!-- <tr class="p-y-8">
+                <td class="fw-400 eg-w-80-p" valign="top">{{'translations.columns' | translate}}</td>
+                <td align="right" class="eg-w-10-p" [attr.colspan]="!params.enableSaveColumnsAndFilters ? 2 : 1">
+                    <button type="button" pButton pRipple pTooltip="{{'translations.clearColumnsAndSorting' | translate}}" class="p-button-rounded p-button-danger p-button-text" icon="pi pi-trash" (click)="clearColumns()"></button>
+                </td>
+                <td *ngIf="params.enableSaveColumnsAndFilters" align="left" class="eg-w-10-p eg-pr-12">
+                    <button type="button" pButton pRipple pTooltip="{{'translations.saveColumnsAndSorting' | translate}}" class="p-button-rounded p-button-info p-button-text" icon="pi pi-save"(click)="saveColumns()"></button>
+                </td>
+            </tr>
+            <tr class="eg-p-y-8" >
+                <td class="fw-400 eg-w-80-p">{{'translations.filters' | translate}}</td>
+                <td align="right" class="eg-w-10-p" [attr.colspan]="!params.enableSaveColumnsAndFilters ? 2 : 1">
+                    <button type="button" pButton pRipple pTooltip="{{'translations.clearFilters' | translate}}" class="p-button-rounded p-button-danger p-button-text" icon="pi pi-trash" (click)="clearFilters()"></button>
+                </td>
+                <td *ngIf="params.enableSaveColumnsAndFilters" align="left" class="eg-w-10-p eg-pr-12">
+                    <button type="button" pButton pRipple pTooltip="{{'translations.saveFilters' | translate}}" class ="p-button-rounded p-button-info p-button-text"  icon="pi pi-save"(click)="saveFilters()" [class.cursor-not-allowed]="params.isSaveFilterDisabled" [disabled]="params.isSaveFilterDisabled" [title]="params.isSaveFilterDisabled ? 'Saving of filter is not allowed when Pivoting' : ''"></button>
+                </td>
+            </tr> -->
+            <!-- <tr class="eg-p-y-8" *ngIf="savedTheme && params.enableSaveColumnsAndFilters">
+                <td class="fw-400 eg-w-90-p">{{'translations.updateTheme' | translate}}</td>
+                <td class="eg-w-10-p" [attr.colspan]="2">
+                    <p-dropdown [pTooltip]="isUserGlobalGridPrefEnabled ? ('translations.updateThemeDisabled' | translate) : ''" [styleClass]="isUserGlobalGridPrefEnabled ? 'bg-gray-500' : ''" [options]="[{value: 'balham', label: 'Balham'}, {value: 'alpine', label: 'Alpine'}]" [(ngModel)]="savedTheme" optionLabel="label"
+                        [readonly]="isUserGlobalGridPrefEnabled" [showClear]="!isUserGlobalGridPrefEnabled" (ngModelChange)="saveTheme()"></p-dropdown> placeholder="{{'translations.saveTheme'}}"
+                </td>
+            </tr> -->
+            <!-- <tr class="eg-p-y-8" *ngIf="formGroup" [formGroup]="formGroup">
+                <td class="fw-400">Excel Mode</td>
+                <td colspan="2" class="w-20-p pr-12" align="right">
+                    <p-toggleButton [onLabel]="'On'" [offLabel]="'Off'" [onIcon]="'pi pi-check'" [offIcon]="'pi pi-times'" formControlName="excelMode"></p-toggleButton>
+                </td>
+            </tr> -->
+        </table>
+    </div>
+</div>

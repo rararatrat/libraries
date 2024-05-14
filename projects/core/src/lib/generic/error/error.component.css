@@ -1,0 +1,16 @@
+.center {
+    /* position: absolute;
+    width: 100%;
+    text-align: center;
+    top: 50%;
+    transform: translateY(-50%); */
+    position: relative;
+    text-align: center;
+    /* transform: translateY(100%); */
+    width: auto;
+  }
+
+.errorContainer {
+    width: 342px;
+    height: 250px;
+}

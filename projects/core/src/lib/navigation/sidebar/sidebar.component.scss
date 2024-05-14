@@ -1,0 +1,313 @@
+@function contrast-color($color:#ffffff, $threshold) {
+  @return if(lightness($color) < $threshold, #ffffff, #000000);
+}
+
+
+
+.eag-sidebar-class{
+  transition: width 100ms ease-in-out;
+  background-color: var(--sidebar);
+  color: var(--sidebar-contrast);
+
+  .sidebar-content{
+
+
+  }
+
+  .sidebar-footer{
+    cursor:pointer;
+    padding: 0.75rem;
+    text-align: center;
+    border-radius : var(--eg-border-radius);
+    font-size: 1rem;
+
+
+    &:hover{
+      background-color: var(--sidebar-tint);
+      font-weight: 500 !important
+
+    }
+
+  }
+}
+
+.sidebar-border {
+  border-color: var(--sidebar-tint);
+  border-top-color: var(--sidebar-tint);
+}
+.sidebar-bg {
+  background: var(--sidebar-tint);
+  border-radius: var(--eg-border-radius);
+}
+
+.eag-sidebar-hide{
+  width: 0px !important;
+  display: none;
+}
+
+.sidebar-items {
+
+  white-space: break-spaces;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  border-radius: var(--border-radius);
+  margin: 0.5rem;
+  color: var(--sidebar-contrast);
+  cursor: pointer;
+  padding: 0.5rem;
+  transition: all .1s ease-in-out;
+
+  &.compact{
+    min-height: 5.3rem;
+    .icon{
+      font-size: 1.15rem
+    }
+    .label{
+      text-align: center !important;
+      font-size: 1rem;
+    }
+  }
+  &.thin{
+    min-height: 3.3rem;
+    .icon{
+      font-size: 1.15rem
+    }
+    .label{
+      display: none !important;
+      text-align: center !important;
+      font-size: 1rem;
+    }
+  }
+
+  &:hover{
+    background-color: var(--sidebar-tint);
+    font-weight: 500;
+  }
+  &:active{
+    background-color: var(--sidebar-tint);
+    font-weight: 500;
+  }
+  &.active{
+    background-color: var(--sidebar-tint);
+    font-weight: 500;
+  }
+  &.disabled{
+    color: var(--sidebar-tint);
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+}
+
+
+i.overlay-listmenu-header{
+  font-size: 1rem;
+}
+.overlay-listmenu-header{
+
+  color : var(--sidebar-contrast);
+  font-size: 1.25rem;
+  font-weight: 600;
+  overflow: hidden;
+  text-decoration:none;
+  display: flex;
+  align-items:center;
+}
+
+
+/* Lisnt menu Sidebar */
+.listMenu-active{
+  background-color: var(--sidebar-tint);
+}
+.listMenuWrapper{
+  transition: height 2550ms ease-in-out;
+}
+
+.listMenu-disabled{
+  color: var(--sidebar-tint) !important;
+  cursor: not-allowed !important;
+  pointer-events: none !important;
+}
+
+.listMenu {
+  font-size:1rem !important;
+  font-weight: 600 !important;
+  border-radius: var(--eg-border-radius) !important; //: 2px;
+  transition: box-shadow .2s;
+
+  /* .p-panelmenu-icon {
+      margin-right: .5rem;
+  } */
+
+  .p-menuitem-icon {
+      margin-right: .5rem;
+  }
+
+  &:hover,&:focus {
+    background-color: var(--sidebar-tint);
+    cursor: pointer;
+  }
+
+  &.active{
+    background-color: var(--sidebar-tint);
+  }
+}
+
+.listMenu-border{
+  border-bottom: 0.01rem solid var(--sidebar-tint);
+}
+
+::ng-deep #menuSidebar {
+  .eg-icon{
+    transition:all 30s ease-out;
+    transition: left 0s;
+    transition: top 0s;
+  }
+  .eg-closed{
+    margin-right: 0.04rem;
+    display: block;
+  }
+  .eg-open{
+    margin-right: 0.04rem;
+    display: none;
+
+  }
+
+  .p-panelmenu {
+
+
+    .p-panelmenu-panel {
+      .p-panelmenu-header {
+        overflow: hidden;
+        transition: all 0.25s ease-in-out;
+        .p-panelmenu-header-link {
+          background-color: unset;
+          font-size: 1rem;
+          color: var(--sidebar-contrast);
+
+          &:hover {
+            background-color: var(--sidebar-tint);
+          }
+
+        }
+        .p-panelmenu-header-action {
+          background-color: unset;
+          padding: 0.75rem;
+          font-size: 1rem;
+          color: var(--sidebar-contrast);
+          border-radius: var(--eg-border-radius);
+          .p-menuitem-icon {
+            margin-right: .5rem;
+         }
+          &:hover {
+            background-color: var(--sidebar-tint);
+          }
+          &:active {
+            background-color: var(--sidebar-tint);
+            font-weight: bolder;
+          }
+          &.active {
+            background-color: var(--sidebar-tint);
+            font-weight: bolder;
+          }
+
+        }
+
+        &.p-highlight {
+          .p-panelmenu-header-link, .p-panelmenu-header-action {
+            background-color: var(--sidebar-tint);
+            border-bottom-right-radius: var(--eg-border-radius);
+            border-bottom-left-radius: var(--eg-border-radius);
+          }
+
+          &[aria-expanded="true"]{
+            .eg-closed{
+              display: none;
+            }
+            .eg-open{
+              display: block;
+            }
+          }
+
+        }
+      }
+      .p-panelmenu-content
+      {
+        border-radius: var(--eg-border-radius);
+      }
+      .p-panelmenu-content:has(p-panelmenusub)
+      {
+        color: var(--sidebar-contrast);
+      }
+      .p-toggleable-content {
+        .p-panelmenu-content {
+          background-color: unset;
+          padding: 0.25rem;
+          color: var(--sidebar-contrast);
+
+
+
+          p-panelmenusub {
+
+            .p-panelmenu-root-submenu {
+              margin: 0.25rem
+            }
+
+            .p-menuitem-link {
+              border-radius: unset;
+              padding: 0.5rem;
+              font-size: 1rem;
+              margin: 0.5rem;
+              margin-right: 0rem;
+              padding:0.75rem;
+              padding-right: 0.5rem;
+              color: var(--sidebar-contrast);
+
+              &:hover,
+              &:focus {
+                background-color: var(--sidebar-tint);
+                border-radius: var(--eg-border-radius);
+                font-weight: bolder;
+              }
+
+              a[aria-expanded="true"]{
+                background-color: var(--sidebar-tint);
+
+              }
+            }
+
+            .p-submenu-list:not(.p-panelmenu-root-submenu) {
+              padding: unset unset unset 1.5rem;
+            }
+
+            p-panelmenusub {
+              .p-panelmenu-root-submenu {
+                margin: 0.25rem
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .p-icon-wrapper {
+    order: 1;
+    margin-right: 0rem;
+  }
+
+  .p-panelmenu-icon {
+    order: 1;
+    margin-right: 0rem;
+    /* to be the first item on right side. */
+  }
+
+  .p-menuitem-text {
+    flex-grow: 1;
+    /*  to fill the whole space and push the icon to the end */
+  }
+}
+
+
+/* Legacy - Compact sidebar */ /* NO USE MODIFYING */
+
+/* removed this code find it in the previous commit ---  */

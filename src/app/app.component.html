@@ -1,0 +1,26 @@
+
+<div class="h-screen max-h-screen overflow-hidden w-screen">
+  <div class="flex flex-row h-full">
+    <div class="bg-white shadow-1 border-round-right-2xl flex-grow-0 overflow-hidden"  > <!--  w-5rem thin--> <!-- w-8rem compact -->
+      <eag-sidebar></eag-sidebar>
+    </div>
+
+    <div class="flex flex-column flex-grow-1 ml-2">
+      <div class="flex-grow-0 w-full bg-white shadow-1 border-round-2xl h-5rem mb-2">
+        <div class="h-20rem">
+          <button (click)="initSideBar('thin', true)">thin</button>
+          <button (click)="initSideBar('compact', true)">compact</button>
+          <button (click)="initSideBar('list', true)">list</button>
+          <button (click)="toggleSidebar()">toggle</button>
+        </div>
+      </div>
+      <div class="flex flex-grow-1 bg-white shadow-1 border-round-2xl  w-full overflow-y-auto">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+

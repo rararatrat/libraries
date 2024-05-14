@@ -1,0 +1,13 @@
+<div class="w-400 h-400">
+    <eag-grid [isDebug]="false"
+        [rowData]="((rowData$ | async) || [])"
+        [(gridParams)]="gridParams"
+        #gridClientSide
+        [id]="gridId"
+        class="h-full w-full"
+        [digitsInfo]="'.2'"
+        [gridId]="gridId"
+        [columnDefs]="columnDefs"
+        [rowModelType]="'clientSide'">
+    </eag-grid>
+</div>

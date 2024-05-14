@@ -1,0 +1,14 @@
+<div class="center mat-typography flex-column">
+    <div class="errorContainer" *ngIf="error">
+        <!-- <div class="p-y-16">
+            <i [class]="error.icon" class="font-rr-secondary wh-80"></i>
+        </div> -->
+        <h1 class="p-y-8 fw-500" [innerHTML]="error.error_code + ' - ' + error.name"></h1>
+        <p class="fs-16 font-rr-grey4 fw-400 lh-24"[innerHTML]="error.message"></p>
+    </div>
+    <ng-content></ng-content>
+
+    <div class="m-2">
+        <a style="color: -webkit-link" class="underline cursor-pointer" (click)="gotoPrev()">Back</a> | <a routerLink="/">Home</a> |  <a routerLink="/login">Log-in</a> | <a routerLink="/logout">Log-out</a>
+    </div>
+</div>

@@ -1,0 +1,39 @@
+<div cdkDropList cdkDropListOrientation="horizontal" class="eg-bg-grey lane-container flex flex-row full-height" (cdkDropListDropped)="dropHorizontal($event, lanes)" [cdkDropListSortPredicate]="getSortableLanes2">
+    <!-- [class.example-container]="!lData?.isCollapsed" -->
+    <ng-container [ngTemplateOutlet]="lanesPanel" [ngTemplateOutletContext]="{lanes: (lanes$ | async)}"></ng-container>
+    <ng-template #lanesPanel let-lanes="lanes">
+        <ng-container *ngFor="let lData of lanes; let i=index">
+            <div *ngIf="!lData?.isHidden" [class]="'example-container'" [class.cursor-move]="!lData?.isLocked" [style]="lData?.isCollapsed ? {'width' : '52px'} : {}"
+                cdkDrag [cdkDragDisabled]="lData?.isLocked" [cdkDragData]="lData"> <!-- [style]="lData?.isCollapsed ? {'width' : '52px'} : {}" [style.order]="l?.position || (i + 1)" -->
+                <ng-container [ngTemplateOutlet]="lanesData" [ngTemplateOutletContext]="{fData: (dataHolder[(lData?.id || 0)] || [])}"></ng-container>
+        
+                <ng-template #lanesData let-fData="fData">
+                    <div class="full-width flex bg-white eg-p-x-4 align-items-center" [class.center]="lData?.isCollapsed"> <!-- [class.cursor-move]="!lData?.isLocked" -->
+                        <span *ngIf="!lData?.isCollapsed" class="align-items-center flex flex-1">
+                            <h2 [innerHTML]="lData?.name"></h2>
+                            <button *ngIf="lData?.isNew" pButton pRipple type="button" [icon]="PI.PLUS" class="p-button-rounded eg-m-x-4 valign-middle" (click)="addNew(lData)"></button>    
+                        </span>
+                        <button pButton pRipple type="button" [icon]="lData.isCollapsed ? PI.ANGLE_RIGHT : PI.ANGLE_LEFT" [pTooltip]="lData.isCollapsed ? 'Expand' : 'Collapse'" class="p-button-rounded p-button-text valign-middle" (click)="collapseExpand(lData, lanes)"></button>
+                        <button *ngIf="!lData?.isCollapsed" pButton pRipple type="button" [icon]="PI.ELLIPSIS_V" pTooltip="More Options" class="p-button-rounded p-button-text valign-middle" (click)="menu.toggle($event)"></button>
+                        <p-menu #menu [popup]="true" [model]="laneMenu" (onHide)="activeLaneMenu=undefined" (onShow)="onPopupShow(lData, i)"></p-menu>
+                    </div>
+        
+                    <div *ngIf="lData?.isCollapsed" 
+                        class="lane-item flex full-width " style="transform: rotate(-90deg); line-height: 20; width: 2rem; white-space: nowrap" [innerHTML]="lData?.name"></div>
+                    <div *ngIf="!lData?.isCollapsed"
+                        cdkDropList
+                        #lane="cdkDropList"
+                        [id]="'lane' + lData?.id"
+                        [cdkDropListData]="fData"
+                        [cdkDropListConnectedTo]="getOtherLanes(lanes, (lData?.id || 0))"
+                        class="example-list eg-w-260"
+                        (cdkDropListDropped)="dropItem($event, (lData?.id || 0))"> 
+                        <div class="example-box" *ngFor="let item of fData; let j = index" cdkDrag [cdkDragData]="item">
+                            <eag-card class="align-items-center flex full-width" [item]="item" (editItem)="editItem($event.mouseEvent, item, j)"></eag-card>
+                        </div>
+                    </div>
+                </ng-template>
+            </div>
+        </ng-container>
+    </ng-template>
+</div>
